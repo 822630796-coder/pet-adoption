@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hope for Paws · 流浪动物领养</title>
+    <!-- 引入Google字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* === 整体样式 === */
+        body {
+            font-family: 'Quicksand', 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fefaf7;
+            color: #4a4a4a;
+            line-height: 1.6;
+            scroll-behavior: smooth; /* 平滑滚动 */
+        }
+        
+        /* === 头部 === */
+        .header {
+            background: linear-gradient(135deg, #8b6b5c 0%, #6d4c41 100%);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+        }
+        .header h1 {
+            font-size: 52px;
+            margin: 0;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .header p {
+            font-size: 22px;
+            opacity: 0.95;
+            font-weight: 400;
+            margin: 10px 0 5px;
+        }
+        
+        /* === 导航 - 可点击 === */
+        .nav {
+            background-color: #a48d82;
+            padding: 18px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 28px;
+            font-size: 18px;
+            font-weight: 500;
+            margin: 0 5px;
+            border-radius: 30px;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        .nav a:hover {
+            background-color: #5d4037;
+            transform: translateY(-2px);
+        }
+        
+        /* === 通用区块 === */
+        .section {
+            max-width: 1300px;
+            margin: 50px auto;
+            padding: 0 30px;
+            scroll-margin-top: 80px; /* 避免被导航栏挡住 */
+        }
+        .section h2 {
+            color: #6d4c41;
+            font-size: 36px;
+            font-weight: 600;
+            border-bottom: 4px solid #d7ccc8;
+            padding-bottom: 15px;
+            margin-bottom: 35px;
+            position: relative;
+        }
+        .section h2:after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: #b38b7a;
+        }
+        
+        /* === 双语小标签 === */
+        .en {
+            color: #a48d82;
+            font-size: 18px;
+            font-weight: 500;
+            margin-left: 12px;
+            font-style: italic;
+        }
+        
+        /* === 卡片网格 === */
+        .pet-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        .pet-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            padding: 25px 20px;
+            width: 260px;
+            text-align: center;
+            transition: all 0.4s;
+            border: 1px solid #f0e8e3;
+        }
+        .pet-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(109, 76, 65, 0.15);
+            border-color: #d7b9a8;
+        }
+        .pet-card img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #efe3db;
+            transition: all 0.4s;
+        }
+        .pet-card:hover img {
+            border-color: #b38b7a;
+            transform: scale(1.02);
+        }
+        .pet-card h3 {
+            color: #5d4037;
+            font-size: 26px;
+            font-weight: 600;
+            margin: 18px 0 5px;
+        }
+        .pet-card .info {
+            color: #a48d82;
+            font-weight: 600;
+            font-size: 16px;
+            margin: 5px 0;
+        }
+        .pet-card .desc {
+            color: #666;
+            font-size: 15px;
+            margin: 12px 0;
+            line-height: 1.5;
+        }
+        
+        /* === 申请领养按钮 - 可点击 === */
+        .adopt-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #8b6b5c 0%, #6d4c41 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(109, 76, 65, 0.3);
+            margin-top: 10px;
+            text-decoration: none;
+        }
+        .adopt-btn:hover {
+            background: linear-gradient(135deg, #6d4c41 0%, #5d4037 100%);
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(109, 76, 65, 0.4);
+        }
+        
+        /* === 关于我们 === */
+        .about {
+            background-color: #f8f1ed;
+            padding: 45px;
+            border-radius: 30px;
+            line-height: 1.9;
+            font-size: 18px;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
+        }
+        
+        /* === 流程步骤 === */
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 25px;
+            margin-top: 40px;
+        }
+        .step {
+            background: white;
+            padding: 30px 25px;
+            border-radius: 20px;
+            width: 200px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border: 1px solid #f0e4dc;
+            transition: all 0.3s;
+        }
+        .step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(109, 76, 65, 0.1);
+        }
+        .step .number {
+            background: linear-gradient(135deg, #8b6b5c 0%, #6d4c41 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: inline-block;
+            line-height: 50px;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(109, 76, 65, 0.3);
+        }
+        .step h3 {
+            color: #5d4037;
+            font-size: 20px;
+            font-weight: 600;
+            margin: 10px 0 5px;
+        }
+        .step p {
+            color: #888;
+            font-size: 15px;
+            margin: 8px 0 0;
+        }
+        
+        /* === 联系方式 === */
+        .contact {
+            background: linear-gradient(135deg, #6d4c41 0%, #5d4037 100%);
+            color: white;
+            padding: 50px;
+            text-align: center;
+            scroll-margin-top: 80px;
+        }
+        .contact h2 {
+            color: white;
+            border-bottom: 3px solid #d7ccc8;
+            display: inline-block;
+            padding-bottom: 12px;
+        }
+        .contact p {
+            font-size: 18px;
+            margin: 15px 0;
+            font-weight: 400;
+        }
+        
+        /* === 页脚 === */
+        .footer {
+            background-color: #3e2e2a;
+            color: #d7ccc8;
+            text-align: center;
+            padding: 25px;
+            font-size: 15px;
+        }
+        
+        /* === 响应式 === */
+        @media (max-width: 768px) {
+            .pet-card { width: 100%; max-width: 320px; }
+            .step { width: 100%; max-width: 280px; }
+            .nav a { display: block; margin: 8px; }
+            .header h1 { font-size: 36px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 头部 Header -->
+    <div class="header">
+        <h1>🐾 流浪动物领养计划</h1>
+        <p>Stray Animal Adoption Initiative</p>
+        <p>给流浪的它们一个温暖的家 · Find Them a Loving Home</p>
+    </div>
+
+    <!-- 导航 Navigation - 可点击 -->
+    <div class="nav">
+        <a href="index.html">首页 Home</a>
+        <a href="#animals">待领养 Animals</a>
+        <a href="#process">领养流程 How to Adopt</a>
+        <a href="#about">关于我们 About</a>
+        <a href="#contact">联系 Contact</a>
+    </div>
+
+    <!-- 关于我们 About Us - 加上id -->
+    <div class="section" id="about">
+        <h2>🌟 关于我们 <span class="en">About Us</span></h2>
+        <div class="about">
+            <p>我们是香港本地的流浪动物救助组织，成立于2020年。六年多来，我们已经帮助超过600只流浪猫狗找到永远的家。</p>
+            <p>We are a local animal rescue organization in Hong Kong, founded in 2020. Over the past six years, we have helped more than 600 stray cats and dogs find their forever homes.</p>
+            <p>每一只动物都经过健康检查、疫苗接种和绝育手术。我们相信，每一个生命都值得被温柔对待。</p>
+            <p>Every animal receives health checks, vaccinations, and sterilization. We believe every life deserves to be treated with kindness.</p>
+        </div>
+    </div>
+
+    <!-- 待领养动物 Available Pets - 加上id -->
+    <div class="section" id="animals">
+        <h2>🐶 等待领养的动物 <span class="en">Available Pets</span></h2>
+        <div class="pet-grid">
+            <!-- 动物卡片 1 -->
+            <div class="pet-card">
+                <img src="https://images.dog.ceo/breeds/samoyed/n02111889_4470.jpg" alt="萨摩耶">
+                <h3>小白</h3>
+                <p class="info">🐕 萨摩耶 · 2岁 · 男生</p>
+                <p class="info">Samoyed · 2 years · Male</p>
+                <p class="desc">性格温顺，爱笑的天使，已绝育已打疫苗</p>
+                <p class="desc">Gentle and friendly, always smiling</p>
+                <a href="#" class="adopt-btn">申请领养 Apply</a>
+            </div>
+            
+            <!-- 动物卡片 2 -->
+            <div class="pet-card">
+                <img src="https://cdn2.thecatapi.com/images/7is.jpg" alt="布偶猫">
+                <h3>团团</h3>
+                <p class="info">🐈 布偶猫 · 1岁 · 女生</p>
+                <p class="info">Ragdoll · 1 year · Female</p>
+                <p class="desc">温柔粘人，喜欢抱抱，已绝育已打疫苗</p>
+                <p class="desc">Gentle and cuddly, loves hugs</p>
+                <a href="#" class="adopt-btn">申请领养 Apply</a>
+            </div>
+            
+            <!-- 动物卡片 3 -->
+            <div class="pet-card">
+                <img src="https://images.dog.ceo/breeds/shiba/shiba-8.jpg" alt="柴犬">
+                <h3>豆豆</h3>
+                <p class="info">🐕 柴犬 · 3岁 · 男生</p>
+                <p class="info">Shiba Inu · 3 years · Male</p>
+                <p class="desc">活泼好奇，表情丰富，已绝育已打疫苗</p>
+                <p class="desc">Energetic and curious, expressive face</p>
+                <a href="#" class="adopt-btn">申请领养 Apply</a>
+            </div>
+            
+            <!-- 动物卡片 4 -->
+            <div class="pet-card">
+                <img src="https://cdn2.thecatapi.com/images/MTg3ODI5MA.jpg" alt="橘猫">
+                <h3>小橘</h3>
+                <p class="info">🐈 橘猫 · 4岁 · 女生</p>
+                <p class="info">Orange Tabby · 4 years · Female</p>
+                <p class="desc">喜欢晒太阳，性格独立，已绝育已打疫苗</p>
+                <p class="desc">Loves sunbathing, independent personality</p>
+                <a href="#" class="adopt-btn">申请领养 Apply</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 领养流程 Adoption Process - 加上id -->
+    <div class="section" id="process">
+        <h2>📋 领养流程 <span class="en">Adoption Process</span></h2>
+        <div class="steps">
+            <div class="step">
+                <div class="number">1</div>
+                <h3>浏览动物</h3>
+                <p>Browse Animals</p>
+                <p>查看待领养动物信息，选择你喜欢的</p>
+            </div>
+            <div class="step">
+                <div class="number">2</div>
+                <h3>填写申请表</h3>
+                <p>Fill Application</p>
+                <p>提交领养申请，我们会在3天内联系你</p>
+            </div>
+            <div class="step">
+                <div class="number">3</div>
+                <h3>家访沟通</h3>
+                <p>Home Visit</p>
+                <p>我们安排家访，确保环境适合动物</p>
+            </div>
+            <div class="step">
+                <div class="number">4</div>
+                <h3>带它回家</h3>
+                <p>Bring Home</p>
+                <p>签订协议，带宠物回家</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 需要准备的物品 -->
+    <div class="section">
+        <h2>🎒 领养前需准备 <span class="en">What You'll Need</span></h2>
+        <div style="background: white; padding: 40px; border-radius: 24px; box-shadow: 0 5px 20px rgba(0,0,0,0.03);">
+            <h3 style="color: #5d4037; font-size: 24px; margin-bottom: 20px;">基本物品清单 Essential Items:</h3>
+            <ul style="font-size: 18px; line-height: 2.2; list-style-type: none; padding-left: 0;">
+                <li style="margin-bottom: 10px;">🐾 食盆和水盆 · Food and water bowls</li>
+                <li style="margin-bottom: 10px;">🐾 舒适的窝 · Comfortable bed</li>
+                <li style="margin-bottom: 10px;">🐾 宠物食品 · Pet food</li>
+                <li style="margin-bottom: 10px;">🐾 玩具 · Toys</li>
+                <li style="margin-bottom: 10px;">🐾 猫砂盆/尿垫 · Litter box/pads</li>
+                <li style="margin-bottom: 10px;">🐾 牵引绳 · Leash and collar</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 成功故事 Success Stories -->
+    <div class="section">
+        <h2>❤️ 领养成功故事 <span class="en">Success Stories</span></h2>
+        <div style="background: #f8f1ed; padding: 40px; border-radius: 24px;">
+            <p><b>🐶 胖胖的家庭：</b>"领养胖胖一年了，它从胆小变得活泼，现在是家里的小太阳。"</p>
+            <p><b>Pang Pang's family:</b> "We adopted Pang Pang a year ago. He went from shy to energetic, now he's the sunshine of our home."</p>
+            <p><b>🐱 雪球的妈妈：</b>"雪球刚来的时候躲在沙发下，现在每天都要趴在我腿上撒娇。"</p>
+            <p><b>Snowball's mom:</b> "Snowball used to hide under the sofa, now she curls up on my lap every day."</p>
+            <p><b>🐕 来福的主人：</b>"来福是我们领养的最正确的决定，它每天陪我跑步，是最好的朋友。"</p>
+            <p><b>Lai Fu's owner:</b> "Adopting Lai Fu was the best decision. He runs with me every day, he's my best friend."</p>
+        </div>
+    </div>
+
+    <!-- 联系方式 Contact - 加上id -->
+    <div class="contact" id="contact">
+        <h2>📞 联系我们 Contact Us</h2>
+        <p>📍 香港动物领养中心 · Hong Kong Animal Adoption Center</p>
+        <p>📱 电话 Tel：+852 1234 5678</p>
+        <p>✉️ 邮箱 Email：adopt@example.org</p>
+        <p>🕒 开放时间 Hours：周二至周日 Tue-Sun 11:00-18:00</p>
+    </div>
+
+    <!-- 页脚 Footer -->
+    <div class="footer">
+        <p>© 2026 流浪动物领养计划 · Stray Animal Adoption Initiative</p>
+        <p>让爱不再流浪 · Give Love a Home</p>
+        <p>本网站为AIDM7350课程作业 · 图片来自免费API</p>
+    </div>
+
+</body>
+</html>
